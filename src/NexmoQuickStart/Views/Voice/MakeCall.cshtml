@@ -1,0 +1,11 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@using static NexmoQuickStart.Controllers.VoiceController
+
+@using (Html.BeginForm("MakeCall", "Voice", FormMethod.Post))
+{
+    <br />
+    <input type="text" name="to" id="to" placeholder="To" />
+    <input type="submit" value="Send" />
+}

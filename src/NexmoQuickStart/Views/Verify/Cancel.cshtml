@@ -1,0 +1,22 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+@using static NexmoQuickStart.Controllers.VerifyController
+
+@if (ViewBag.status != null)
+{
+    <script>
+
+        alert('@ViewBag.status');
+    </script>
+
+}
+
+@using (Html.BeginForm("Cancel", "Verify", FormMethod.Post))
+{
+    <br />
+    <input type="text" name="requestID" id="requestID" placeholder="Request ID" />
+    <input type="submit" value="Search" />
+}
+
