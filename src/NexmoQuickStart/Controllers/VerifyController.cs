@@ -30,6 +30,7 @@ namespace NexmoQuickStart.Controllers
                 brand = "NexmoQS"
             });
             HttpContext.Session.SetString("requestID", start.request_id);
+
             return RedirectToAction("Check");
         }
         [HttpGet]
@@ -70,7 +71,9 @@ namespace NexmoQuickStart.Controllers
             {
                 request_id = requestID
             });
+            ViewBag.error_text = search.error_text;
             ViewBag.status = search.status;
+       
             return View();
         }
 
@@ -88,7 +91,6 @@ namespace NexmoQuickStart.Controllers
                 request_id = requestID,
                 cmd = "cancel"
             });
-            
             ViewBag.status = results.status;
             return View();
         }

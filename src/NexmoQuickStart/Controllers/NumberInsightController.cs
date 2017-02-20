@@ -12,6 +12,11 @@ namespace NexmoQuickStart.Controllers
 {
     public class NumberInsightController : Controller
     {
+        [HttpGet]
+        public IActionResult Index()
+        {
+            return View();
+        }
         // GET: /<controller>/
         [HttpGet]
         public IActionResult Basic()
@@ -26,6 +31,7 @@ namespace NexmoQuickStart.Controllers
             {
                 number = number,
             });
+
             HttpContext.Session.SetString("requestID", results.request_id);
             HttpContext.Session.SetString("iNumber", results.international_format_number);
             HttpContext.Session.SetString("nNumber", results.national_format_number);

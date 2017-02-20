@@ -40,7 +40,7 @@ namespace NexmoQuickStart.Controllers
                 from = new Call.Endpoint
                 {
                     type = "phone",
-                    number = "NEXMO_VIRTUAL_NUMBER"
+                    number = "NEXMO-VIRTUAL-NUMBER"
                 },
                 answer_url = new[]
                 {
@@ -48,12 +48,32 @@ namespace NexmoQuickStart.Controllers
                 }
             });
             StatusCode(200);
-            return RedirectToAction("Index", "SMS");
+            return RedirectToAction("Index", "Voice");
         }
-        
 
-        public IActionResult RecieveCall()
+        [HttpGet]
+        public IActionResult CallList()
         {
+            var results = Call.List()._embedded.calls;
+            for(int i = 0; i < results.Count; i++)
+            {
+                Debug.WriteLine(results[i].conversation_uuid);
+            }
+            ViewData.Add("results",results);
+            ViewData.Add("count", results.Count);
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult GetCall()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult GetCall(string id)
+        {
+            var call = Call.Get(id);
+            ViewData.Add("call", call);
             return View();
         }
     }

@@ -32,11 +32,10 @@ namespace NexmoQuickStart.Controllers
             var results = SMS.Send(new SMS.SMSRequest
             {
                 
-                from = "NEXMO_VIRTUAL_NUMBER",
+                from = "NEXMO_NUMBER",
                 to = to,
                 text = text
             });
-
             return View("Index");
         }
 
@@ -74,8 +73,7 @@ namespace NexmoQuickStart.Controllers
             Debug.WriteLine("To: " + response.to);
             Debug.WriteLine("Status: " + response.status);
             Debug.WriteLine("-------------------------------------------------------------------------");
-            Response.StatusCode = 200;
-            return View();
+            return StatusCode(200);
         }
     }
 }

@@ -6,16 +6,16 @@
 
 @if (ViewBag.Message != null)
 {
-    <script> 
-        alert('@ViewBag.Message');
-    </script>
+    <h2>@ViewBag.Message</h2>
 
 }
-
-@using (Html.BeginForm("Check", "Verify", FormMethod.Post))
+else
 {
-    <br />
-    <input type="text" name="code" id="code" placeholder="code" />
-    <input type="submit" value="Check" />
+    @using (Html.BeginForm("Check", "Verify", FormMethod.Post))
+    {
+        <br />
+        <input type="text" name="code" id="code" placeholder="code" />
+        <input type="submit" value="Check" />
+    }
 }
 
