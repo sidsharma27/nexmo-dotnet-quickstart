@@ -34,7 +34,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Session" Version="1.1.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.CommandLine" Version="1.0.1" />
     <PackageReference Include="jose-jwt" Version="2.0.2" />
-    <PackageReference Include="Nexmo.Csharp.Client" Version="2.2.0-rc2" />
+    <PackageReference Include="Nexmo.Csharp.Client" Version="2.2.0" />
   </ItemGroup>
 
   <Target Name="PrepublishScript" BeforeTargets="PrepareForPublish">

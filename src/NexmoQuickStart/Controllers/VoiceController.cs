@@ -40,7 +40,7 @@ namespace NexmoQuickStart.Controllers
                 from = new Call.Endpoint
                 {
                     type = "phone",
-                    number = "NEXMO-VIRTUAL-NUMBER"
+                    number = Configuration.Instance.Settings["appSettings:NEXMO_FROM_NUMBER"]
                 },
                 answer_url = new[]
                 {

@@ -32,7 +32,7 @@ namespace NexmoQuickStart.Controllers
             var results = SMS.Send(new SMS.SMSRequest
             {
                 
-                from = "NEXMO_NUMBER",
+                from = Configuration.Instance.Settings["appSettings:NEXMO_FROM_NUMBER"],
                 to = to,
                 text = text
             });
