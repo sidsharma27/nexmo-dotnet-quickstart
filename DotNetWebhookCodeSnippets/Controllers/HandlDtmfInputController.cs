@@ -22,10 +22,10 @@ namespace DotNetWebhookCodeSnippets.Controllers
             var eventUrl = $"{Request.Scheme}://{host}/webhooks/dtmf";
 
             var talkAction = new TalkAction() { Text = "Hello please press any key to continue" };
-            var inputAction = new InputAction()
+            var inputAction = new MultiInputAction()
             {
                 EventUrl = new[] { eventUrl },
-                MaxDigits = 1
+                Dtmf = new DtmfSettings { MaxDigits=1 }                
             };
             var ncco = new Ncco(talkAction, inputAction);
             return ncco.ToString();
@@ -34,12 +34,12 @@ namespace DotNetWebhookCodeSnippets.Controllers
         [HttpPost("webhooks/dtmf")]
         public string Dtmf()
         {
-            Input input;
+            MultiInput input;
             using (StreamReader reader = new StreamReader(Request.Body, Encoding.UTF8))
             {
-                input = EventBase.ParseEvent(reader.ReadToEndAsync().Result) as Input;
+                input = EventBase.ParseEvent(reader.ReadToEndAsync().Result) as MultiInput;
             }
-            var talkAction = new TalkAction() { Text = $"You Pressed {input?.Dtmf}, goodbye" };
+            var talkAction = new TalkAction() { Text = $"You Pressed {input?.Dtmf.Digits}, goodbye" };
             var ncco = new Ncco(talkAction);
             return ncco.ToString();
         }
