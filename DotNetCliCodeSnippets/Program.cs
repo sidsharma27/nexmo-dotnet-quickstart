@@ -19,14 +19,24 @@ namespace DotnetCliCodeSnippets
             factory.AddSerilog(log);
             LogProvider.SetLogFactory(factory);
             var snippet = string.Empty;
-            var oSet = new OptionSet() { { "s|snippet=", "The Code Snippet you'd like to execute", v=> snippet=v } };
+            var useAsync = false;
+            var oSet = new OptionSet() { { "s|snippet=", "The Code Snippet you'd like to execute", v=> snippet=v },
+            { "a|async=", "whether or not to use async", v=> useAsync=bool.Parse(v) }};
 
             var parsedArgs = oSet.Parse(args);
 
             var type = Type.GetType("DotnetCliCodeSnippets." + snippet);
 
             var runnableSnippet = (ICodeSnippet)Activator.CreateInstance(type);
-            runnableSnippet.Execute();
+            if (useAsync)
+            {
+                Console.WriteLine("running Async");
+                runnableSnippet.ExecuteAsync().GetAwaiter().GetResult();
+            }
+            else
+            {
+                runnableSnippet.Execute();
+            }            
         }
     }
 }

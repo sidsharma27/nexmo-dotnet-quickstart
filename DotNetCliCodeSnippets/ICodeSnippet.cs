@@ -7,5 +7,6 @@ namespace DotnetCliCodeSnippets
     public interface ICodeSnippet
     {
         void Execute();
+        System.Threading.Tasks.Task ExecuteAsync();
     }
 }

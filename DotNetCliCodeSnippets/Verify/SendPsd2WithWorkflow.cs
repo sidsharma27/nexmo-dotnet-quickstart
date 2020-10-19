@@ -21,5 +21,20 @@ namespace DotnetCliCodeSnippets.Verify
             var request = new Psd2Request { Amount = AMOUNT, Payee = PAYEE, Number = RECIPIENT_NUMBER, WorkflowId = Psd2Request.Workflow.TTS };
             var response = client.VerifyClient.VerifyRequestWithPSD2(request);
         }
+
+        public async System.Threading.Tasks.Task ExecuteAsync()
+        {
+            var VONAGE_API_KEY = Environment.GetEnvironmentVariable("VONAGE_API_KEY") ?? "VONAGE_API_KEY";
+            var VONAGE_API_SECRET = Environment.GetEnvironmentVariable("VONAGE_API_SECRET") ?? "VONAGE_API_SECRET";
+            var RECIPIENT_NUMBER = Environment.GetEnvironmentVariable("RECIPIENT_NUMBER") ?? "RECIPIENT_NUMBER";
+            var PAYEE = Environment.GetEnvironmentVariable("PAYEE") ?? "PAYEE";
+            var AMOUNT = Double.Parse(Environment.GetEnvironmentVariable("Amount") ?? "5.0");
+
+            var creds = Credentials.FromApiKeyAndSecret(VONAGE_API_KEY, VONAGE_API_SECRET);
+            var client = new VonageClient(creds);
+
+            var request = new Psd2Request { Amount = AMOUNT, Payee = PAYEE, Number = RECIPIENT_NUMBER, WorkflowId = Psd2Request.Workflow.TTS };
+            var response = await client.VerifyClient.VerifyRequestWithPSD2Async(request);
+        }
     }
 }

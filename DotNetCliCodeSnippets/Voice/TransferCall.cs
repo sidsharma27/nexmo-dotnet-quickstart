@@ -30,5 +30,29 @@ namespace DotnetCliCodeSnippets.Voice
 
             Console.WriteLine($"Call transfer success: {response}");
         }
+
+        public async System.Threading.Tasks.Task ExecuteAsync()
+        {
+            var VONAGE_APPLICATION_ID = Environment.GetEnvironmentVariable("VONAGE_APPLICATION_ID") ?? "VONAGE_APPLICATION_ID";
+            var VONAGE_PRIVATE_KEY_PATH = Environment.GetEnvironmentVariable("VONAGE_PRIVATE_KEY_PATH") ?? "VONAGE_PRIVATE_KEY_PATH";
+            var UUID = Environment.GetEnvironmentVariable("UUID") ?? "UUID";
+            var NCCO_URL = Environment.GetEnvironmentVariable("NCCO_URL") ?? "NCCO_URL";
+
+            var credentials = Credentials.FromAppIdAndPrivateKeyPath(VONAGE_APPLICATION_ID, VONAGE_PRIVATE_KEY_PATH);
+            var client = new VonageClient(credentials);
+
+            var callEditCommand = new CallEditCommand()
+            {
+                Action = CallEditCommand.ActionType.transfer,
+                Destination = new Destination()
+                {
+                    Url = new[] { NCCO_URL }
+                }
+            };
+
+            var response = await client.VoiceClient.UpdateCallAsync(UUID, callEditCommand);
+
+            Console.WriteLine($"Call transfer success: {response}");
+        }
     }
 }
